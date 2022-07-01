@@ -6,12 +6,12 @@ import { NovoMembro } from "./pages/NovoMembro";
 import { Login } from "./pages/Login";
 import { EditarMembro } from "./pages/EditarMembro";
 import {AuthContext, AuthProvider} from './services/context';
+import { Register } from "./pages/Register";
 
-const routesNotHeader = ['/login'];
+const routesNotHeader = ['/login', '/register'];
 
 export const AppRoutes = () => {
 
-  const { autenticated } = useContext(AuthContext);
   const {pathname} = useLocation(); 
 
   const Private = ({children}) => {
@@ -19,7 +19,7 @@ export const AppRoutes = () => {
 
 
     if(loading){
-      return <div>Você não tem acesso a essa página...</div>
+      return 
     }
 
     if(!autenticated){
@@ -31,22 +31,25 @@ export const AppRoutes = () => {
 
   }
 
+  console.log('pathname', pathname);
 
 
 
   return (
     <>
 
-     <AuthProvider>
+      <AuthProvider>
 
      
      {!routesNotHeader.includes(pathname) && <Header />  }
      
         <Routes>
           <Route path="/login" element={ <Login />} />
+          <Route path="/register" element={ <Register/>} />
           <Route path="/" exact element={<Private><ListagemDeMembros /></Private>} />
           <Route path="/novo" exact element={<Private><NovoMembro /></Private>} />
           <Route path="/editar:id" exact element={<Private><EditarMembro /></Private>} />
+          <Route path="*" element={  <h1>Pagina de erro!!!</h1>} />
         </Routes>
       </AuthProvider>
     

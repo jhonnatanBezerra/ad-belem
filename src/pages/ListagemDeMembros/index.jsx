@@ -43,13 +43,13 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
   const [dataInicial, setDataInicial] = useState(null);
   const [dataFinal, setDataFinal] = useState(null);
 
-  
+  useEffect(()=>{
+    getMembers();
+  },[])
 
   const getMembers = async () => {
 
     let query = '';
-
-    
 
     if(selectedFilter.value === 'nome' && search === '') {
       query = '';

@@ -1,4 +1,4 @@
-import {  Divider, Stack,  } from '@mui/material';
+import {  Divider, Stack, Tooltip,  } from '@mui/material';
 
 import {   PencilSimple } from 'phosphor-react';
 import React from 'react';
@@ -23,7 +23,9 @@ export const CardMember = ({member}) => {
       <Divider orientation='vertical'  />
 
       <Stack spacing={0.5} sx={{p: 1, width: '100%'}} >
-        <h3>{helpers.limitText(helpers.captalizeFirstChart(member.nome),20)}</h3>
+        <Tooltip title={member.nome}>
+          <h3>{helpers.limitText(helpers.captalizeFirstChart(member.nome),20)}</h3>
+        </Tooltip>
 
         <Stack direction={'row'} spacing={1}>
           <span>Cargo:</span>
