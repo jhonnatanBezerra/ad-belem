@@ -85,9 +85,9 @@ export const Register = () => {
             <h4 style={{textAlign: 'center'}}>Assembléia de Deus  Ministerio de Belem</h4>
             <img src={Logo} style={{width: '70%',  objectFit: 'contain'}} alt="logo application"  />
 
-            <TextField required fullWidth  label="Nome de usúario" value={name} onChange={e=> setName(e.target.value)} variant="outlined" />
-            <TextField required fullWidth  label="E-mail" value={email} onChange={e=> setEmail(e.target.value)} variant="outlined" />
-            <TextField required fullWidth  label="Senha" value={password} onChange={e=> setPassword(e.target.value)} variant="outlined" />
+            <TextField  fullWidth  label="Nome de usúario" value={name} onChange={e=> setName(e.target.value)} variant="outlined" />
+            <TextField  fullWidth  label="E-mail" value={email} onChange={e=> setEmail(e.target.value)} variant="outlined" />
+            <TextField  fullWidth  label="Senha" value={password} onChange={e=> setPassword(e.target.value)} variant="outlined" />
           
             <Button disabled={loading ? true : false}  size='large' type='submit' fullWidth variant="contained">{loading ? <CircularProgress size={28} color="inherit" /> : 'Registrar'}</Button> 
           

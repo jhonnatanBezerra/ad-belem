@@ -125,7 +125,11 @@ export const EditarMembro = () => {
   }, []);
 
   const getDetailsMember = async () => {
-    const {data} = await api.get(`/membros/${id}`);	
+    const {data} = await api.get(`/membros/${id}`,{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });	
     console.log(data);
     setName(data.nome);
     setSexo(data.sexo);
@@ -149,7 +153,7 @@ export const EditarMembro = () => {
     setCity(data.cidade);
     setCellPhone(data.celular);
     setPhone(data.fone);
-    setBaptismalDate(data.data_batismo);
+    setBaptismalDate(data.databatismo);
     setBaptismalAdress(data.localbatismo);
     setChurch(data.igrejabatismo);
     setSpouse(data.conjuge);
@@ -191,7 +195,11 @@ export const EditarMembro = () => {
     
 
     try {
-      const {data: response, status} = await axios.post(`http://127.0.0.1:8000/api/membros/${id}`, data);
+      const {data: response, status} = await axios.post(`http://127.0.0.1:8000/api/membros/${id}`, data,{
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
 
       if (status === 200) {
         setOpen(true);
@@ -225,12 +233,20 @@ export const EditarMembro = () => {
   }
 
   const getAllCongregations = async () => {
-    const {data} = await axios.get('http://127.0.0.1:8000/api/congregacoes');
+    const {data} = await axios.get('http://127.0.0.1:8000/api/congregacoes',{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     setListCongregation(data);
   }
 
   const getAllMembers = async () => {
-    const {data} = await axios.get('http://127.0.0.1:8000/api/tipo-membro');
+    const {data} = await axios.get('http://127.0.0.1:8000/api/tipo-membro',{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
     setListRole(data);
   }
 

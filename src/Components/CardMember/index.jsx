@@ -1,16 +1,18 @@
 import {  Divider, Stack, Tooltip,  } from '@mui/material';
 
 import {   PencilSimple } from 'phosphor-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { baseUrl } from '../../services/api';
+import { baseUrl, api } from '../../services/api';
 import { helpers } from '../../helpers';
+import './styles.css';
 
 
 export const CardMember = ({member}) => {
 
   const {id} = member;
+  const token = 'Bearer' + localStorage.getItem('token');
 
 
   return (
@@ -23,29 +25,29 @@ export const CardMember = ({member}) => {
       <Divider orientation='vertical'  />
 
       <Stack spacing={0.5} sx={{p: 1, width: '100%'}} >
-        <Tooltip title={member.nome}>
-          <h3>{helpers.limitText(helpers.captalizeFirstChart(member.nome),20)}</h3>
+        <Tooltip title={member.nome} >
+          <h3 className='overflow-width'>{member.nome}</h3>
         </Tooltip>
 
         <Stack direction={'row'} spacing={1}>
           <span>Cargo:</span>
-          <strong>{helpers.captalizeFirstChart(member.tipo_membro.tipo)}</strong>
+          <strong className='overflow-width'>{helpers.captalizeFirstChart(member.tipo_membro.tipo)}</strong>
         </Stack>
 
         <Stack direction={'row'} spacing={1}>
           <span>Congregação:</span>
-          <strong>{helpers.captalizeFirstChart(member.congregacao.congregacao)}</strong>
+          <strong className='overflow-width'>{helpers.captalizeFirstChart(member.congregacao.congregacao)}</strong>
           
         </Stack>
 
-        <Stack direction={'row'} spacing={1}>
+        <Stack direction={'row'} spacing={1} sx={{}}>
           <span>Telefone:</span>
-          <strong>{helpers.maskPhone(member.celular)}</strong>
+          <strong className='overflow-width'>{helpers.maskPhone(member.celular)}</strong>
         </Stack>
 
         <Stack direction={'row'} spacing={1}>
           <span>Nascimento:</span>
-          <strong>{new Date(member.nascimento+ ' 00:00:01').toLocaleDateString()}</strong>
+          <strong className='overflow-width'>{new Date(member.nascimento+ ' 00:00:01').toLocaleDateString()}</strong>
         </Stack>
 
         {/* {props.edit && 

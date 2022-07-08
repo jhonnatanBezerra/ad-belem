@@ -45,10 +45,7 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
 
   useEffect(()=>{
     getMembers();
-
-  },[]);
-
-
+  },[])
 
   const getMembers = async () => {
 
@@ -90,25 +87,24 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
   }
 
   return (
-    <Container maxWidth="xl" sx={{marginBottom: '15px'}} >
+    <Container maxWidth="lg" sx={{marginBottom: '15px'}} >
 
        <Grid container spacing={2} >
 
         <Grid item xs={12} sm={12} md={12} sx={{mt: 2}} >
         
-         <Grid container spacing={2} sx={{flexDirection: {xs: 'column-reverse', sm: 'row', md: 'row'},}}>
+          <Stack direction={'row'} spacing={2}>
 
-            <Grid item xs={12} sm={8} md={8} >
-              
-            {selectedFilter.value !== 'data-nascimento' 
-              ? 
+            {selectedFilter.value !== 'data-nascimento' ? 
+
+
               <TextField
-                label={selectedFilter.placeholder}
-                fullWidth
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyPress={onKeyPress}
-                InputProps={{
-                endAdornment: (
+              label={selectedFilter.placeholder}
+              fullWidth
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyPress={onKeyPress}
+              InputProps={{
+              endAdornment: (
                   <InputAdornment position="end">
                   <Stack direction={'row'} spacing={2}>
                   <MagnifyingGlass onClick={()=> getMembers()} size={28} style={{cursor: 'pointer'}} />
@@ -117,12 +113,12 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
                       </Link>
                     </Stack>
                   </InputAdornment>
-                ),}}/>
+                  ),}}/>
 
               :
               <Stack direction={'row'} spacing={2}  sx={{ width: '100%'}}>
 
-                <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={brLocale}>
+                 <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={brLocale}>
                   <DatePicker
 
                     fulllWidth
@@ -149,30 +145,26 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
                 <Button size='large' sx={{ px: 5, width: '220px'}} disableElevation variant={'contained'} >Buscar</Button>
 
               </Stack>
-
+              
             }
 
-            </Grid>
+            <FormControl sx={{width: '250px'}} >
+              <InputLabel id="filtros-label">Buscar por</InputLabel>
+              <Select                  
+                labelId="filtros-label"
+                id="filtros"
+                value={selectedFilter}
+                label="Buscar por"
+                onChange={e => setSelectedFilter(e.target.value)}
+                MenuProps={MenuProps} >
+                    {filters.map((filter) => (
+                      <MenuItem key={filter.id} value={filter} >{filter.name}</MenuItem>
+                    ))}
+                    
+                  </Select>
+            </FormControl>
 
-            <Grid item xs={12} sm={4} md={4} >
-              <FormControl sx={{width: '100%'}} >
-                <InputLabel id="filtros-label">Buscar por</InputLabel>
-                <Select                  
-                  labelId="filtros-label"
-                  id="filtros"
-                  value={selectedFilter}
-                  label="Buscar por"
-                  onChange={e => setSelectedFilter(e.target.value)}
-                  MenuProps={MenuProps} >
-                      {filters.map((filter) => (
-                        <MenuItem key={filter.id} value={filter} >{filter.name}</MenuItem>
-                      ))}
-                      
-                    </Select>
-              </FormControl>
-            </Grid>
-
-         </Grid>
+          </Stack>
        
         </Grid>
 
@@ -187,7 +179,7 @@ export const ListagemDeMembros = React.memo(function ListagemDeMembros() {
        </Grid>
 
        <Stack spacing={2} mt={2} alignItems={'center'} >
-        <Pagination count={10} color="primary" size='large' />
+        <Pagination count={10} color="primary" />
        </Stack>
     </Container>
 

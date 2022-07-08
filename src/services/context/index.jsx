@@ -18,6 +18,7 @@ export const AuthProvider = ({children}) => {
     checkToken();
     
     const recoveredUser = localStorage.getItem('user');
+   
     if(recoveredUser){
       setUser(JSON.parse(recoveredUser));
       setAutenticated(true);
@@ -28,9 +29,15 @@ export const AuthProvider = ({children}) => {
   const checkToken = async () => {
 
     const lastAcess = localStorage.getItem('lastAcess');
+    const token = localStorage.getItem('token');
 
     if(new Date().getTime() - lastAcess >  timeToExpireToken){
       handleLogout();
+    }
+
+    if(token){
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+      console.log('token ativado');
     }
 
     
