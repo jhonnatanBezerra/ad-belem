@@ -16,7 +16,7 @@ export const CardMember = ({member}) => {
 
 
   return (
-    <Link to={`/editar${id}`} style={{width: '100%', cursor: 'pointer',  height: 150, borderRadius: 10, display: 'flex', overflow: 'hidden', border: '1px solid #ccc', padding: '5px', position: 'relative'}}>
+    <Link to={id % 2 === 0 ? `/editar${id}` : `/detalhes${id}`} style={{width: '100%', cursor: 'pointer',  height: 150, borderRadius: 10, display: 'flex', overflow: 'hidden', border: '1px solid #ccc', padding: '5px', position: 'relative'}}>
 
       <div style={{width: '35%',}}>
         <img src={`${baseUrl}foto/${id}?hash=${new Date().getTime()}`}  style={{objectFit: 'contain', width: '100%', height: '100%'}} />
@@ -49,13 +49,6 @@ export const CardMember = ({member}) => {
           <span>Nascimento:</span>
           <strong className='overflow-width'>{new Date(member.nascimento+ ' 00:00:01').toLocaleDateString()}</strong>
         </Stack>
-
-        {/* {props.edit && 
-          <Link to={`/editar${props.index}`}>
-            <PencilSimple style={{position: 'absolute', bottom: 5, right: 5, cursor: 'pointer'}} size={22} />
-          </Link>
-        } */}
-
 
       </Stack>
     </Link>
